@@ -11,3 +11,4 @@ untracked/modified -> Added to staging -> commit
 9. git pull
 10. git merge <branch-name>
 11. git clone <url>
+12. git branch -D <branch-name>
