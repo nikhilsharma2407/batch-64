@@ -9,3 +9,4 @@ untracked/modified -> Added to staging -> commit
 7. git remote add origin https://github.com/nikhilsharma2407/batch-64
 8. git push -u origin <branch-name>
 9. git pull
+10. git merge <branch-name>
