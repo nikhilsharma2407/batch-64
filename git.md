@@ -10,3 +10,4 @@ untracked/modified -> Added to staging -> commit
 8. git push -u origin <branch-name>
 9. git pull
 10. git merge <branch-name>
+11. git branch -D <branch-name>
