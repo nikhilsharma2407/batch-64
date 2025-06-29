@@ -1,0 +1,19 @@
+#name:focus {
+    background-color: aqua !important;
+}
+
+label[for="name"]:hover {
+    background-color: red;
+}
+
+#sibling-selector {
+    p~span {
+        background-color: red;
+    }
+
+    p+span {
+        background-color: aqua;
+    }
+}
+
+#div-selector {}
