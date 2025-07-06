@@ -10,7 +10,7 @@
         display: flex;
         height: 800px;
         border: 1px dashed black;
-        flex-direction: row;
+        flex-direction: column;
     }
     .flex-item {
         height: 50px;
@@ -21,21 +21,28 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
     }
 
-    .shrink {
-        /* flex-shrink: 0; */
+    .flex-item:nth-child(3n+1){
+        align-self: flex-start;
+    }
+    .flex-item:nth-child(3n+2){
+        align-self: center;
+    }
+    .flex-item:nth-child(3n+3){
+        align-self: flex-end;
     }
 </style>
 <body>
     <div class="container">
-        <div class="flex-item shrink">1</div>
+        <div class="flex-item">1</div>
         <div class="flex-item">2</div>
         <div class="flex-item">3</div>
-        <div class="flex-item shrink">4</div>
+        <div class="flex-item">4</div>
         <div class="flex-item">5</div>
         <div class="flex-item">6</div>
-        <div class="flex-item shrink">7</div>
+        <div class="flex-item">7</div>
         <div class="flex-item">8</div>
         <div class="flex-item">9</div>
         <div class="flex-item">10</div>
