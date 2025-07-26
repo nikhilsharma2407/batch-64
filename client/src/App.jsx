@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import ClassComponent from './ClassComponent';
 import { useState } from 'react';
+import FunctionalComponent from './FunctionalComponent';
 
 function App() {
   const [showComponent, setShowComponent] = useState(true);
@@ -9,7 +10,13 @@ function App() {
   return (
     <>
       <button onClick={() => setShowComponent(!showComponent)}>{showComponent ? 'hide' : 'show'} component</button>
-      {showComponent ? <ClassComponent name={name} /> : null}
+      {showComponent ?
+        <>
+          <ClassComponent name={name} />
+          <FunctionalComponent name={name} />
+        </> : null}
+
+
     </>
   )
 }
