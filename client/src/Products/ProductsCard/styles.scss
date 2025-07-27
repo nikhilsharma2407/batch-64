@@ -1,0 +1,32 @@
+// mixins - reuseable style fn's
+.image {
+  height: 250px;
+  object-fit: contain;
+}
+
+.product-text {
+  font-size: 13px;
+  color: #666;
+}
+
+.content {
+  height: 90px;
+}
+
+.desc {
+  overflow: hidden;
+  height: 60px;
+  text-overflow: ellipsis;
+}
+
+.title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card:hover{
+    cursor: pointer;
+    box-shadow: 10px 10px 10px 2px grey;
+    transition: ease-in-out .2s;
+}

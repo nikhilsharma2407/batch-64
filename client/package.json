@@ -8,10 +8,15 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.11.0",
+    "bootstrap": "^5.3.7",
     "react": "^19.1.0",
+    "react-bootstrap": "^2.10.10",
+    "react-bootstrap-icons": "^1.11.6",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.0",
     "react-scripts": "5.0.1",
+    "react-simple-star-rating": "^5.1.7",
+    "sass": "^1.89.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
