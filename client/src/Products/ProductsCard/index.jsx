@@ -19,9 +19,10 @@ const ProductsCard = (product) => {
     return (
         <Col xl={{ span: 3 }} lg={{ span: 4 }} md={{ span: 5, offset: 0 }}
             sm={{ span: 10, offset: 1 }}>
-            <Card className='mb-3'>
+            <Card className='mb-5 mb-sm-3 product-card w-100'>
+                <section className='d-sm-none'>This is only visible on small screen</section>
                 <CardHeader className='title'>{title}</CardHeader>
-                <CardImg src={image} variant='top' className='image' />
+                <CardImg src={image} variant='top' className='image p-2' />
                 <CardBody>
                     <section className='content'>
                         <section className='product-text'>${price}</section>

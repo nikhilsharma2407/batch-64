@@ -1,0 +1,5 @@
+@mixin card-box-shadow($duration: 0.2s) {
+  cursor: pointer;
+  box-shadow: 10px 10px 10px 2px grey;
+  transition: ease-in-out $duration;
+}
