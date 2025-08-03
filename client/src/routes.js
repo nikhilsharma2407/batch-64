@@ -1,6 +1,10 @@
 import FunctionalComponent from "./FunctionalComponent";
 import Products from "./Products";
+import Parent, { Child1, Child2, Child3 } from "./Routing/Parent";
 import Routing from "./Routing";
+import UserCart from "./UserCart";
+import ProtectedRoute from "./ProtectedRoute";
+import Orders from "./Orders";
 
 const routes = [
   {
@@ -12,13 +16,22 @@ const routes = [
     element: <Routing />,
   },
   { path: "test", element: <h1>abcd</h1> },
+  { path: "login", element: <h1>Login Component</h1> },
+  {
+    path: "user",
+    element: <ProtectedRoute />,
+    children: [
+      { path: "cart", element: <UserCart /> },
+      { path: "orders", element: <Orders /> }
+    ],
+  },
   {
     path: "parent",
-    element: <h1>Parent</h1>,
+    element: <Parent />,
     children: [
-      { path: "child-1", element: <h1>Child-1</h1> },
-      { path: "child-2", element: <h1>Child-2</h1> },
-      { path: "child-3", element: <h1>Child-3</h1> },
+      { path: "child-1", element: <Child1 /> },
+      { path: "child-2", element: <Child2 /> },
+      { path: "child-3", element: <Child3 /> },
     ],
   },
 ];
