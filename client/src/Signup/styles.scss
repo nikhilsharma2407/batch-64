@@ -1,0 +1,9 @@
+@import "../common.scss";
+
+.signup {
+    
+  &.card {
+    @include card-box-shadow;
+    border-radius: 5%;
+  }
+}

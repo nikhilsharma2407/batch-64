@@ -18,7 +18,7 @@ const Products = () => {
 
 
     return <>
-        <Container fluid>
+        <Container fluid className='pt-3'>
             <Row>
                 {products.map((product) => <ProductsCard key={product.id} {...product} />)}
             </Row>

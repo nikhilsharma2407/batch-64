@@ -5,11 +5,16 @@ import Routing from "./Routing";
 import UserCart from "./UserCart";
 import ProtectedRoute from "./ProtectedRoute";
 import Orders from "./Orders";
+import Signup from "./Signup";
 
 const routes = [
   {
-    path: "products",
+    path: "",
     element: <Products />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
   },
   {
     path: "routing/:productId",
