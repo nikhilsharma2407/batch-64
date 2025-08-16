@@ -6,4 +6,10 @@
     @include card-box-shadow;
     border-radius: 5%;
   }
+
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 36px;
+  }
 }

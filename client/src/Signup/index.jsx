@@ -1,14 +1,21 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useRef, useState } from 'react'
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Container, FloatingLabel, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap'
 import './styles.scss';
 import signupReducer, { ACTION_TYPES, initialState } from './signupReducer';
+import { Eye, EyeSlash } from 'react-bootstrap-icons';
 
 const Signup = () => {
   const [state, dispatch] = useReducer(signupReducer, initialState);
-
   const { name, email, username, password } = state;
-
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const nameRef = useRef(null);
+
+  useEffect(() => {
+    console.log("🚀 ~ Signup ~ nameRef.current:", nameRef.current);
+    nameRef.current.focus();
+  }, [])
 
   useEffect(() => {
     setIsPasswordValid(Object.values(password.validation).every(Boolean));
@@ -34,7 +41,7 @@ const Signup = () => {
             <CardBody>
               <FormGroup controlId='name' className='mb-3'>
                 <FormLabel>Name</FormLabel>
-                <FormControl placeholder='Enter Name' name='name'
+                <FormControl ref={nameRef} placeholder='Enter Name' name='name'
                   onChange={(e) => dispatch({ type: ACTION_TYPES.NAME, payload: e.target.value })} />
               </FormGroup>
 
@@ -47,10 +54,13 @@ const Signup = () => {
                 <FormLabel>Email</FormLabel>
                 <FormControl type='email' placeholder='Enter email' name='email' onChange={actionCreator} />
               </FormGroup>
-              <FormGroup controlId='password' className='mb-3'>
+              <FormGroup controlId='password' className='mb-3 position-relative'>
                 <FormLabel>Password</FormLabel>
-                <FormControl type='password' placeholder='Enter password' name='password' onChange={actionCreator} />
+                <FormControl type={showPassword ? 'text' : 'password'} placeholder='Enter password' name='password' onChange={actionCreator} />
+                <span onClick={() => { setShowPassword(!showPassword) }} className='password-toggle'>{showPassword ? <Eye /> : <EyeSlash />}</span>
+
               </FormGroup>
+              {/* <Eye /> */}
               {password?.value ? <ul className='small'>
                 <li className={password.validation.hasLowerCase ? 'text-success' : 'text-danger'}>At least one lowercase letter</li>
                 <li className={password.validation.hasUpperCase ? 'text-success' : 'text-danger'}>At least one uppercase letter</li>
@@ -61,7 +71,7 @@ const Signup = () => {
 
             </CardBody>
             <CardFooter className='d-flex justify-content-center'>
-              <Button variant='outline-primary' disabled={!isFormValid} >Signup</Button>
+              <Button variant='outline-primary' disabled={!isFormValid}>Signup</Button>
             </CardFooter>
           </Card>
         </Col>

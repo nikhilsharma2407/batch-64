@@ -6,6 +6,7 @@ import UserCart from "./UserCart";
 import ProtectedRoute from "./ProtectedRoute";
 import Orders from "./Orders";
 import Signup from "./Signup";
+import ReactHooks from "./ReactHooks/ReactHooks";
 
 const routes = [
   {
@@ -22,6 +23,7 @@ const routes = [
   },
   { path: "test", element: <h1>abcd</h1> },
   { path: "login", element: <h1>Login Component</h1> },
+  { path: "hooks", element: <ReactHooks /> },
   {
     path: "user",
     element: <ProtectedRoute />,
