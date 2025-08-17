@@ -1,16 +1,27 @@
+import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { UserContext } from './UserContextProvider';
+import useIsLoggedIn from './useIsLoggedIn';
 
 const MyNavBar = () => {
+    // const { userdata } = useContext(UserContext);
+
+    // const isLoggedIn = !!userdata;
+
+    const isUserLoggedIn = useIsLoggedIn();
+    console.log("🚀 ~ MyNavBar ~ isUserLoggedIn:", isUserLoggedIn)
+
     return (
         <Navbar expand="md" bg="dark" data-bs-theme="dark">
             <Container fluid>
-                <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/'>AmazeKart</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -28,8 +39,8 @@ const MyNavBar = () => {
                                 Something else here
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#" disabled>
-                            Link
+                        <Nav.Link as={Link} to='/counter'>
+                            Counter
                         </Nav.Link>
                     </Nav>
                     <Nav>

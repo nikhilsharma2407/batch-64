@@ -1,5 +1,6 @@
 // const map = new Map();
 
+
 // map.set('abc',132);
 
 // console.log("🚀 ~ map.get(abc):", map.get('abc'))
@@ -13,3 +14,8 @@
 // Object.entries()
 // Object.values(obj)
 
+const fn = async()=>{
+    return 123;
+};
+
+console.log(fn())

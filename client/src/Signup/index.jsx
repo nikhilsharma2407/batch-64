@@ -43,24 +43,27 @@ const Signup = () => {
                 <FormLabel>Name</FormLabel>
                 <FormControl ref={nameRef} placeholder='Enter Name' name='name'
                   onChange={(e) => dispatch({ type: ACTION_TYPES.NAME, payload: e.target.value })} />
+                {name?.value && !name.isValid && <span className='text-danger'>Name is invalid!</span>}
+                {name?.value === '' && <span className='text-danger'>Name is required!</span>}
               </FormGroup>
 
               <FormGroup controlId='username' className='mb-3'>
                 <FormLabel>Username</FormLabel>
-                <FormControl placeholder='Enter Username' name='username' onChange={actionCreator}
-                />
+                <FormControl placeholder='Enter Username' name='username' onChange={actionCreator} />
+                {username?.value && !username.isValid && <span className='text-danger'>Username is invalid!</span>}
+                {username?.value === '' && <span className='text-danger'>Username is required!</span>}
               </FormGroup>
               <FormGroup controlId='email' className='mb-3'>
                 <FormLabel>Email</FormLabel>
                 <FormControl type='email' placeholder='Enter email' name='email' onChange={actionCreator} />
+                {email?.value && !email.isValid && <span className='text-danger'>Email is invalid!</span>}
+                {email?.value === '' && <span className='text-danger'>Email is required!</span>}
               </FormGroup>
               <FormGroup controlId='password' className='mb-3 position-relative'>
                 <FormLabel>Password</FormLabel>
                 <FormControl type={showPassword ? 'text' : 'password'} placeholder='Enter password' name='password' onChange={actionCreator} />
                 <span onClick={() => { setShowPassword(!showPassword) }} className='password-toggle'>{showPassword ? <Eye /> : <EyeSlash />}</span>
-
               </FormGroup>
-              {/* <Eye /> */}
               {password?.value ? <ul className='small'>
                 <li className={password.validation.hasLowerCase ? 'text-success' : 'text-danger'}>At least one lowercase letter</li>
                 <li className={password.validation.hasUpperCase ? 'text-success' : 'text-danger'}>At least one uppercase letter</li>

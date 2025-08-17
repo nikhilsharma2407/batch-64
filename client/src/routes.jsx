@@ -7,6 +7,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import Orders from "./Orders";
 import Signup from "./Signup";
 import ReactHooks from "./ReactHooks/ReactHooks";
+import Counter from "./Counter";
+import Login from "./Login";
 
 const routes = [
   {
@@ -22,8 +24,9 @@ const routes = [
     element: <Routing />,
   },
   { path: "test", element: <h1>abcd</h1> },
-  { path: "login", element: <h1>Login Component</h1> },
+  { path: "login", element: <Login /> },
   { path: "hooks", element: <ReactHooks /> },
+  { path: "counter", element: <Counter /> },
   {
     path: "user",
     element: <ProtectedRoute />,

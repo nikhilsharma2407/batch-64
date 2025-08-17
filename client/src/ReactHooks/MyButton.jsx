@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Child2 } from '../Routing/Parent';
 
 const MyButton = ({ onClick, text, setResult, result }) => {
     console.log("🚀 ~ MyButton ~ result:", result)
