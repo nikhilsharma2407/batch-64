@@ -26,7 +26,7 @@ const userSchema = new Schema({
 });
 
 userSchema.statics.findUser = async (username) => {
-  const user = await UserModel.findOne({ username }, { _id: 0, __v: 0 });
+  const user = (await UserModel.findOne({ username }, { _id: 0, __v: 0 }))?.toObject();
   if (!user) {
     const err = new Error("Username doesn't exist");
     err.status = 404;
