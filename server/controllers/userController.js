@@ -3,6 +3,12 @@ const { genPassworhHash, verifyPassword } = require("../utils/passwordUtil");
 const { errorCreator, responseCreator } = require("../utils/responseCreator");
 const UserModel = require("./UserModel");
 
+/**
+ *
+ * @param {*} req
+ * @param {import("express").Response} res
+ * @param {*} next
+ */
 const signup = async (req, res, next) => {
   try {
     const { password, ...userdata } = req.body;
@@ -17,6 +23,12 @@ const signup = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {*} next
+ */
+
 const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
@@ -27,12 +39,10 @@ const login = async (req, res, next) => {
     // password validation
     const isPwdVerified = await verifyPassword(password, passwordHash);
     if (isPwdVerified) {
-      const token = generateToken(userdata,'1m');
+      const token = generateToken(userdata);
+      res.cookie("authToken", token, { maxAge: 3600_000, httpOnly: true });
       res.send(
-        responseCreator(`${username} logged in successfully!!!`, {
-          ...userdata,
-          token,
-        })
+        responseCreator(`${username} logged in successfully!!!`, userdata)
       );
     } else {
       errorCreator("Incorrect Password", 401);

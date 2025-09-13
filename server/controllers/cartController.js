@@ -3,9 +3,10 @@ const { responseCreator } = require("../utils/responseCreator");
 const UserModel = require("./UserModel");
 
 const addToCart = async (req, res, next) => {
-  console.log("🚀 ~ authController ~ req.headers:", req.headers?.authorization);
-  const token = req.headers.authorization?.split(" ")[1];
-  const { username } = verifyToken(token);
+  // console.log("🚀 ~ authController ~ req.headers:", req.headers?.authorization);
+  // const token = req.headers.authorization?.split(" ")[1];
+  // const { username } = verifyToken(token);
+  const { username } = res.locals.userdata;
   const { product } = req.body;
   try {
     const data = await UserModel.addToCart(username, product);
