@@ -14,7 +14,9 @@ const authController = async (req, res, next) => {
   try {
     const { authToken } = req.cookies;
     const { username } = verifyToken(authToken);
-    const userdata = await UserModel.findUser(username);
+    const { password, secret, ...userdata } = await UserModel.findUser(
+      username
+    );
     if (userdata) {
       // res.locals -> placeholder for us to store some values
       res.locals.userdata = userdata;

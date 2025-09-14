@@ -18,6 +18,9 @@ const userSchema = new Schema({
     type: String,
     required: [true, "is required"],
   },
+  secret: {
+    type: String,
+  },
   cart: {
     items: [Object],
     totalQuantity: Number,
@@ -26,7 +29,9 @@ const userSchema = new Schema({
 });
 
 userSchema.statics.findUser = async (username) => {
-  const user = (await UserModel.findOne({ username }, { _id: 0, __v: 0 }))?.toObject();
+  const user = (
+    await UserModel.findOne({ username }, { _id: 0, __v: 0 })
+  )?.toObject();
   if (!user) {
     const err = new Error("Username doesn't exist");
     err.status = 404;
@@ -86,8 +91,9 @@ userSchema.statics.calculateTotalPrice = async (username) => {
       },
     },
   ];
+  await UserModel.aggregate(pipeLine);
   const cart = (await UserModel.findUser(username)).cart;
-  return cart
+  return cart;
 };
 
 userSchema.statics.addToCart = async (username, product) => {
@@ -99,8 +105,7 @@ userSchema.statics.addToCart = async (username, product) => {
       $addToSet: { "cart.items": { ...product, quantity: 1 } },
     }
   );
-  console.log("🚀 ~ updateData:", updateData);
-  if (updateData.modifiedCount || true) {
+  if (updateData.modifiedCount) {
     const data = await UserModel.calculateTotalPrice(username);
     console.log("🚀 ~ data.cart:", data);
 
@@ -109,42 +114,86 @@ userSchema.statics.addToCart = async (username, product) => {
 };
 
 userSchema.statics.removeFromCart = async (username, product) => {
-  const userData = await UserModel.updateOne(
+  const updateData = await UserModel.updateOne(
     {
       username,
+      "cart.items.id": product.id,
     },
     {
-      $addToSet: { "cart.items": { ...product, quantity: 1 } },
+      $pull: { "cart.items": { id: product.id } },
     }
   );
-  console.log("🚀 ~ userData:", userData);
-  return userData;
+  if (updateData.modifiedCount) {
+    const data = await UserModel.calculateTotalPrice(username);
+    return data;
+  }
 };
 
 userSchema.statics.increment = async (username, product) => {
-  const userData = await UserModel.updateOne(
+  const updateData = await UserModel.updateOne(
     {
       username,
+      "cart.items.id": product.id,
     },
     {
-      $addToSet: { "cart.items": { ...product, quantity: 1 } },
+      $inc: { "cart.items.$.quantity": 1 },
     }
   );
-  console.log("🚀 ~ userData:", userData);
-  return userData;
+  if (updateData.modifiedCount) {
+    const data = await UserModel.calculateTotalPrice(username);
+    return data;
+  }
 };
 
 userSchema.statics.decrement = async (username, product) => {
-  const userData = await UserModel.updateOne(
+  const updateData = (
+    await UserModel.findOneAndUpdate(
+      {
+        username,
+        "cart.items.id": product.id,
+      },
+      {
+        $inc: { "cart.items.$.quantity": -1 },
+      },
+      { new: true }
+    )
+  ).cart.items;
+  console.log("🚀 ~ updateData:decrement", updateData);
+
+  if (updateData.find(({ id }) => id === product.id)?.quantity === 0) {
+    return UserModel.removeFromCart(username, product);
+  }
+  const data = await UserModel.calculateTotalPrice(username);
+  return data;
+};
+
+userSchema.statics.getCartItems = async (username) => {
+  const cartItems = await UserModel.findOne({ username }, { cart: 1 });
+  return cartItems.cart;
+};
+
+userSchema.statics.clearCart = async (username) => {
+  const updateData = await UserModel.findOneAndUpdate(
+    { username },
     {
-      username,
+      $set: { "cart.items": [], "cart.totalQuantity": 0, "cart.totalPrice": 0 },
     },
+    { new: true }
+  );
+
+  return updateData.cart;
+};
+
+userSchema.statics.updatePassword = async (username, password) => {
+  const updateData = await UserModel.updateOne(
+    { username },
     {
-      $addToSet: { "cart.items": { ...product, quantity: 1 } },
+      $set: { password },
     }
   );
-  console.log("🚀 ~ userData:", userData);
-  return userData;
+  if (updateData.modifiedCount) {
+    return true;
+  }
 };
 
 const UserModel = model("users", userSchema);
