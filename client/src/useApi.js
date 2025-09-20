@@ -1,19 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "./UserContextProvider";
 import { ApiContext } from "./ApiContextProvider";
-import axios from "axios";
+import { REQUEST_TYPES, axiosInstance } from "./apiUtils";
 
-const useApi = (url, type) => {
-  const { setUserData } = useContext(UserContext);
-  const { isLoading, message, setIsLoading, setMessage, setSuccess, success } =
-    useContext(ApiContext);
+const useApi = (url, type = REQUEST_TYPES.GET) => {
+  const {
+    isLoading,
+    message,
+    setIsLoading,
+    setMessage,
+    setSuccess,
+    success,
+    setUserData,
+  } = useContext(UserContext);
   const [response, setResponse] = useState(null);
 
-  const makeRequest = async (payload, updateUserData = false) => {
+  const makeRequest = async (payload, updateUserData = true) => {
     try {
       setIsLoading(true);
       setMessage(null);
-      const apiData = (await axios[type](url, payload)).data;
+      const apiData = (await axiosInstance[type](url, payload)).data;
       const { message, data, success } = apiData;
       setSuccess(success);
       setMessage(message);
@@ -24,7 +30,9 @@ const useApi = (url, type) => {
       }
     } catch (error) {
       setSuccess(false);
-      if (error?.message) {
+      if (error.response?.data?.message) {
+        setMessage(error.response?.data?.message);
+      } else {
         setMessage(error.message);
       }
     } finally {

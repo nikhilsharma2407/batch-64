@@ -16,6 +16,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.7.1",
     "react-simple-star-rating": "^5.1.7",
+    "react-toastify": "^11.0.5",
     "redux": "^5.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^3.1.0",

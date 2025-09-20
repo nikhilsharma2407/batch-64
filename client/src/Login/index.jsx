@@ -4,13 +4,15 @@ import './styles.scss';
 import { Eye, EyeSlash } from 'react-bootstrap-icons';
 import signupReducer, { initialState } from '../Signup/signupReducer';
 import { UserContext } from '../UserContextProvider';
+import useApi from '../useApi';
+import { ENDPOINTS, REQUEST_TYPES } from '../apiUtils';
 
 const Login = () => {
   const [state, dispatch] = useReducer(signupReducer, initialState);
-  const { setUserData } = useContext(UserContext)
-  const { name, email, username, password } = state;
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const { username, password } = state;
   const [showPassword, setShowPassword] = useState(false);
+
+  const { makeRequest } = useApi(ENDPOINTS.USER.LOGIN, REQUEST_TYPES.POST);
 
   const usernameRef = useRef(null);
 
@@ -19,11 +21,6 @@ const Login = () => {
     usernameRef.current?.focus();
   }, [])
 
-  useEffect(() => {
-    setIsPasswordValid(Object.values(password.validation).every(Boolean));
-    console.log("🚀 ~ Signup ~ Object.values(password.validation):", Object.values(password.validation, Object.values(password.validation).every(Boolean)))
-  }, [password.value])
-
 
   const actionCreator = (e) => {
     dispatch({ type: e.target.name, payload: e.target.value })
@@ -31,12 +28,11 @@ const Login = () => {
 
 
   const onLogin = () => {
-    setUserData({
-      username: 'test',
-    })
+    const payload = { username: username.value, password: password.value }
+    makeRequest(payload);
   }
 
-  const isFormValid = username.isValid && password.value.length;
+  const isFormValid = username.isValid && password.value?.length;
 
 
   return (

@@ -32,7 +32,7 @@ export const initialState = {
 
 const NAME_PATTERN = /^[A-Z][a-z]+$/;
 const EMAIL_PATTERN = /^\w+([.+]\w+)?@[a-z]{3,}\.[a-z]{2,}$/;
-const USERNAME_PATTERN = /^[a-z]+$/;
+const USERNAME_PATTERN = /^[a-z\d]+$/;
 
 // action -> {type, payload}
 const signupReducer = (state = initialState, action) => {

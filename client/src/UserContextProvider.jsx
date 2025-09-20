@@ -14,11 +14,14 @@ export const UserContext = createContext({
 
 const UserContextProvider = ({ children }) => {
     const [userdata, setUserData] = useState(null);
-
+    const [message, setMessage] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     return <UserContext.Provider value={{
         userdata,
-        setUserData
+        setUserData,
+        message, setMessage, isLoading, setIsLoading, success, setSuccess
     }}>
         {children}
     </UserContext.Provider>

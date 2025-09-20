@@ -28,15 +28,15 @@ let router = createBrowserRouter([
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
 root.render(
-  <ApiContextProvider>
-    <UserContextProvider>
+  <UserContextProvider>
+    <ApiContextProvider>
       <Provider store={store}>
         <RouterProvider router={router}>
           <App />
         </RouterProvider>
       </Provider>
-    </UserContextProvider>
-  </ApiContextProvider>
+    </ApiContextProvider>
+  </UserContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

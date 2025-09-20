@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { errorCreator } = require("../utils/responseCreator");
 
 const userSchema = new Schema({
   username: {
@@ -92,8 +93,9 @@ userSchema.statics.calculateTotalPrice = async (username) => {
     },
   ];
   await UserModel.aggregate(pipeLine);
-  const cart = (await UserModel.findUser(username)).cart;
-  return cart;
+
+  const { secret, password, ...userData } = await UserModel.findUser(username);
+  return userData;
 };
 
 userSchema.statics.addToCart = async (username, product) => {
@@ -185,6 +187,13 @@ userSchema.statics.clearCart = async (username) => {
 };
 
 userSchema.statics.updatePassword = async (username, password) => {
+  const userdata = await UserModel.findUser(username);
+  const isSame = compare(password, userdata.password);
+
+  if (isSame) {
+    errorCreator("New password cannot be same as old password!!!", 403);
+  }
+
   const updateData = await UserModel.updateOne(
     { username },
     {

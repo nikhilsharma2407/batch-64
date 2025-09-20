@@ -3,6 +3,7 @@ import './styles.scss'
 import { Badge, Button, Card, CardBody, CardFooter, CardHeader, CardImg, CardTitle, Col } from 'react-bootstrap'
 import { BagPlusFill } from 'react-bootstrap-icons'
 import { Rating } from 'react-simple-star-rating'
+import CartCounter from './CartCounter'
 
 const ProductsCard = (product) => {
     const {
@@ -15,6 +16,7 @@ const ProductsCard = (product) => {
         rating,
     } = product
 
+    const showCartCounter = true;
 
     return (
         <Col xl={{ span: 3 }} lg={{ span: 4 }} md={{ span: 5, offset: 0 }}
@@ -34,12 +36,13 @@ const ProductsCard = (product) => {
                     </section>
                 </CardBody>
                 <CardFooter>
-                    <Button variant='outline-primary'>
+                    {showCartCounter ? <CartCounter /> : <Button variant='outline-primary'>
                         <section className='d-flex align-items-center'>
                             <BagPlusFill size={25} className='me-2' />
                             Add To Cart
                         </section>
-                    </Button>
+                    </Button>}
+
 
                 </CardFooter>
             </Card>
