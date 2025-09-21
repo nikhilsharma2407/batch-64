@@ -8,15 +8,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { UserContext } from './UserContextProvider';
-import useIsLoggedIn from './useIsLoggedIn';
+import useGetUserData from './useIsLoggedIn';
+import useApi from './useApi';
+import { ENDPOINTS } from './apiUtils';
 
 const MyNavBar = () => {
-    // const { userdata } = useContext(UserContext);
+    const { isLoggedIn } = useGetUserData()
 
-    // const isLoggedIn = !!userdata;
-
-    const isUserLoggedIn = useIsLoggedIn();
-    console.log("🚀 ~ MyNavBar ~ isUserLoggedIn:", isUserLoggedIn)
+    const { makeRequest } = useApi(ENDPOINTS.USER.LOGOUT)
 
     return (
         <Navbar expand="md" bg="dark" data-bs-theme="dark">
@@ -44,8 +43,11 @@ const MyNavBar = () => {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link as={Link} to="login">Login</Nav.Link>
-                        <Nav.Link as={Link} to="signup">Signup</Nav.Link>
+                        {isLoggedIn ? <Nav.Link onClick={() => makeRequest()}>Logout</Nav.Link> : <>
+                            <Nav.Link as={Link} to="login">Login</Nav.Link>
+                            <Nav.Link as={Link} to="signup">Signup</Nav.Link>
+                        </>}
+
                     </Nav>
                     <Form className="d-flex">
                         <Form.Control

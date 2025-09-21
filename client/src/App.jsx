@@ -1,17 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
 import ClassComponent from './ClassComponent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FunctionalComponent from './FunctionalComponent';
 import Products from './Products';
 import MyNavBar from './MyNavBar';
 import { Link, Outlet } from 'react-router-dom';
 import Loader from './Loader';
 import MyToast from './MyToast';
+import useApi from './useApi';
+import { ENDPOINTS } from './apiUtils';
 
 function App() {
-  const [showComponent, setShowComponent] = useState(true);
-  const name = 'Nikhil'
+  const { makeRequest: makeLoginReq } = useApi(ENDPOINTS.USER.LOGIN)
+
+  useEffect(() => {
+    makeLoginReq();
+  }, []);
+
+
   return (
     <>
       <MyNavBar />

@@ -35,4 +35,11 @@
   &.card:hover {
     @include card-box-shadow;
   }
+  .card-footer {
+    display: flex;
+    height: 56px;
+  }
+  .action-btn {
+    flex: 1;
+  }
 }

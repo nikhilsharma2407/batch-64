@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./UserContextProvider";
 import { ApiContext } from "./ApiContextProvider";
-import { REQUEST_TYPES, axiosInstance } from "./apiUtils";
+import { ENDPOINTS, REQUEST_TYPES, axiosInstance } from "./apiUtils";
 
 const useApi = (url, type = REQUEST_TYPES.GET) => {
   const {
@@ -20,7 +20,7 @@ const useApi = (url, type = REQUEST_TYPES.GET) => {
       setIsLoading(true);
       setMessage(null);
       const apiData = (await axiosInstance[type](url, payload)).data;
-      const { message, data, success } = apiData;
+      const { message, data = null, success } = apiData;
       setSuccess(success);
       setMessage(message);
       if (updateUserData) {

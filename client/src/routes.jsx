@@ -9,6 +9,7 @@ import Signup from "./Signup";
 import ReactHooks from "./ReactHooks/ReactHooks";
 import Counter from "./Counter";
 import Login from "./Login";
+import EditableProduct from "./Products/ProductsCard/EditableProduct";
 
 const routes = [
   {
@@ -27,6 +28,9 @@ const routes = [
   { path: "login", element: <Login /> },
   { path: "hooks", element: <ReactHooks /> },
   { path: "counter", element: <Counter /> },
+  
+  { path: "product/edit/:id", element: <EditableProduct /> },
+  
   {
     path: "user",
     element: <ProtectedRoute />,

@@ -1,11 +1,10 @@
-import { useContext } from "react"
-import { UserContext } from "./UserContextProvider"
+import { useContext } from "react";
+import { UserContext } from "./UserContextProvider";
 
-const useIsLoggedIn = () => {
-    const {userdata} = useContext(UserContext);
+const useGetUserData = () => {
+  const data = useContext(UserContext);
+  const isLoggedIn = !!data.userdata;
+  return { isLoggedIn, ...data };
+};
 
-    return !!(userdata?.username);
-  
-}
-
-export default useIsLoggedIn
+export default useGetUserData;
