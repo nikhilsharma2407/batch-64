@@ -10,6 +10,7 @@ import ReactHooks from "./ReactHooks/ReactHooks";
 import Counter from "./Counter";
 import Login from "./Login";
 import EditableProduct from "./Products/ProductsCard/EditableProduct";
+import Cart from "./Cart";
 
 const routes = [
   {
@@ -35,7 +36,7 @@ const routes = [
     path: "user",
     element: <ProtectedRoute />,
     children: [
-      { path: "cart", element: <UserCart /> },
+      { path: "cart", element: <Cart /> },
       { path: "orders", element: <Orders /> }
     ],
   },
