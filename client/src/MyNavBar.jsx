@@ -11,9 +11,13 @@ import { UserContext } from './UserContextProvider';
 import useGetUserData from './useIsLoggedIn';
 import useApi from './useApi';
 import { ENDPOINTS } from './apiUtils';
+import { Cart } from 'react-bootstrap-icons';
+import { Badge } from 'react-bootstrap';
 
 const MyNavBar = () => {
-    const { isLoggedIn } = useGetUserData()
+    const { isLoggedIn, userdata } = useGetUserData();
+
+    const cartQty = userdata?.cart?.totalQuantity
 
     const { makeRequest } = useApi(ENDPOINTS.USER.LOGOUT)
 
@@ -43,10 +47,26 @@ const MyNavBar = () => {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        {isLoggedIn ? <Nav.Link onClick={() => makeRequest()}>Logout</Nav.Link> : <>
-                            <Nav.Link as={Link} to="login">Login</Nav.Link>
-                            <Nav.Link as={Link} to="signup">Signup</Nav.Link>
-                        </>}
+                        {isLoggedIn ?
+                            <>
+                                <Nav.Link as={Link} to='/user/cart'>
+                                    <Cart size={20} />
+                                    {
+                                        cartQty ? <Badge pill style={{
+                                            position: 'relative',
+                                            top: '-10px',
+                                            right: '10px',
+                                        }}>{cartQty}
+                                        </Badge> : null
+                                    }
+                                </Nav.Link>
+                                <Nav.Link onClick={() => makeRequest()}>Logout</Nav.Link>
+                            </>
+                            :
+                            <>
+                                <Nav.Link as={Link} to="login">Login</Nav.Link>
+                                <Nav.Link as={Link} to="signup">Signup</Nav.Link>
+                            </>}
 
                     </Nav>
                     <Form className="d-flex">
@@ -60,7 +80,7 @@ const MyNavBar = () => {
                     </Form>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+        </Navbar >
     );
 }
 

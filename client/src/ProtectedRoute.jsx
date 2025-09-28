@@ -8,20 +8,26 @@ const ProtectedRoute = () => {
     const [navigateToLogin, setNavigateToLogin] = useState(null);
 
     useEffect(() => {
-
-        if (!isLoading) {
+        // login api is finished loading
+        if (isLoading === false) {
             if (isLoggedIn)
                 setNavigateToLogin(false)
             else {
                 setNavigateToLogin(true)
             }
         }
-
     }, [isLoading, isLoggedIn])
 
-    return (
-        navigateToLogin === true ? <Navigate to='/login' /> : <Outlet />
-    )
+    if (navigateToLogin === true) {
+        return <Navigate to='/login' />
+    }
+
+    else if (navigateToLogin === false) {
+        return <Outlet />
+    }
+
+    return null;
+
 }
 
 export default ProtectedRoute

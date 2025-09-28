@@ -12,6 +12,10 @@ export const ENDPOINTS = {
     RESET_PASSWORD: "/user/reset-password",
     LOGOUT: "/user/logout",
   },
+  STRIPE: {
+    CREATE_CHECKOUT_SESSION: "/stripe/create-checkout-session",
+    CHECKOUT_SESSION: "/stripe/checkout-session",
+  },
   CART: {
     ADD: "/cart/add",
     REMOVE: "/cart/remove",

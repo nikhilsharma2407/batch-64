@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const { errorCreator } = require("../utils/responseCreator");
+const { compare } = require("bcrypt");
 
 const userSchema = new Schema({
   username: {
@@ -26,6 +27,10 @@ const userSchema = new Schema({
     items: [Object],
     totalQuantity: Number,
     totalPrice: Number,
+  },
+  orders: {
+    type: [Object],
+    default: [],
   },
 });
 
@@ -203,6 +208,16 @@ userSchema.statics.updatePassword = async (username, password) => {
   if (updateData.modifiedCount) {
     return true;
   }
+};
+
+userSchema.statics.updateOrders = async (username, order) => {
+  await UserModel.clearCart(username);
+  return UserModel.updateOne(
+    { username },
+    {
+      $push: { orders: order },
+    }
+  );
 };
 
 const UserModel = model("users", userSchema);

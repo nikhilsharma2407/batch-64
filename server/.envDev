@@ -1,2 +1,4 @@
-DB_URL=mongodb+srv://admin:<password>@cluster0.68wuypr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-SECRET_KEY=$2b$10$Rim17d3wcd1Uy0/DTbziNO
+DB_URL=<mogoURL>
+SECRET_KEY=
+STRIPE_SECRET_KEY=pk_xxxxxxxxxxxx
+STRIPE_PUBLISHABLE_KEY=sk_xxxxxxxxxxxx

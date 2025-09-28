@@ -19,14 +19,14 @@ const useApi = (url, type = REQUEST_TYPES.GET) => {
     try {
       setIsLoading(true);
       setMessage(null);
-      const apiData = (await axiosInstance[type](url, payload)).data;
-      const { message, data = null, success } = apiData;
+      const apiResponse = (await axiosInstance[type](url, payload)).data;
+      const { message, data = null, success } = apiResponse;
       setSuccess(success);
       setMessage(message);
       if (updateUserData) {
         setUserData(data);
       } else {
-        setResponse(data);
+        setResponse(apiResponse);
       }
     } catch (error) {
       setSuccess(false);

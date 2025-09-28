@@ -1,43 +1,21 @@
 import React, { useEffect } from 'react'
 import useApi from '../useApi'
-import { ENDPOINTS, REQUEST_TYPES } from '../apiUtils'
-import { Card, CardBody, Col, Container, Row, Image, FormCheck, Button, Badge, ProgressBar } from 'react-bootstrap';
-import './styles.scss'
+import { ENDPOINTS } from '../apiUtils'
+import { Card, CardBody, Col, Container, Row, Image, FormCheck, Badge } from 'react-bootstrap';
 import { Plus, Trash } from 'react-bootstrap-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import './styles.scss'
 
-const Cart = () => {
+const Success = () => {
+    const { makeRequest, response } = useApi(ENDPOINTS.STRIPE.CHECKOUT_SESSION);
+    console.log("🚀 ~ Success ~ response:", response)
 
-    const navigate = useNavigate();
-    const { makeRequest, response } = useApi(ENDPOINTS.CART.GET_CART_ITEMS);
-    const { makeRequest: clearCartApi } = useApi(ENDPOINTS.CART.CLEAR_CART);
-    const { makeRequest: checkoutApi, response: checkoutSessionResponse } = useApi(ENDPOINTS.STRIPE.CREATE_CHECKOUT_SESSION, REQUEST_TYPES.POST);
-
+    const totalPrice = response?.data?.amount
+    const totalQuantity = response?.data?.totalQuantity || 8
 
     useEffect(() => {
         makeRequest(null, false);
-    }, []);
-
-    const { totalPrice, totalQuantity } = response?.data || {}
-
-    const clearCart = () => {
-        clearCartApi();
-    }
-
-    const initiateCheckout = () => {
-        checkoutApi(null, false);
-    }
-
-    useEffect(() => {
-        if (checkoutSessionResponse) {
-            const { session: { url } } = checkoutSessionResponse;
-
-            if (url) {
-                window.location.href = url
-            }
-        }
-    }, [checkoutSessionResponse])
-
+    }, [])
 
     return (
         <Container fluid>
@@ -46,7 +24,7 @@ const Cart = () => {
                 <Col md={9}>
                     <Card className='cart-item'>
                         <CardBody>
-                            <h2>Shopping Cart</h2>
+                            <h2>Order Details</h2>
                             <hr />
 
                             {/* repeat this for multiple products */}
@@ -107,22 +85,12 @@ const Cart = () => {
                     </Card>
                 </Col>
 
-                {/* right section */}
                 <Col md={3}>
                     <Card className='mt-5'>
                         <CardBody>
                             <section>
-                                <section className='d-flex align-items-center'>
-                                    <ProgressBar className='w-100 me-3' variant='success' now={totalPrice} max={499} />
-                                    <span>499</span>
-                                </section>
-                                {totalPrice > 500 && <span className='text-success'>Your order is eligible for FREE Delivery.</span>}
-
                                 {/* <h5>Subtotal ({totalPrice}):  ₹{totalPrice?.toLocaleString('en-IN')}</h5> */}
                                 <h5>Subtotal ({totalQuantity}):  ${totalPrice?.toLocaleString('en-IN')}</h5>
-                                <FormCheck className='mt-3' label='This order contains a gift' />
-                                <Button onClick={initiateCheckout} variant='warning my-2' className='rounded-border w-100'>Proceed to Buy</Button>
-                                <Button onClick={clearCart} variant='danger' className='rounded-border w-100'>Clear Cart</Button>
                             </section>
 
                         </CardBody>
@@ -133,4 +101,4 @@ const Cart = () => {
     )
 }
 
-export default Cart
+export default Success

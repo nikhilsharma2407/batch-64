@@ -11,6 +11,7 @@ import Counter from "./Counter";
 import Login from "./Login";
 import EditableProduct from "./Products/ProductsCard/EditableProduct";
 import Cart from "./Cart";
+import Success from "./Checkout/Success";
 
 const routes = [
   {
@@ -29,15 +30,16 @@ const routes = [
   { path: "login", element: <Login /> },
   { path: "hooks", element: <ReactHooks /> },
   { path: "counter", element: <Counter /> },
-  
+
   { path: "product/edit/:id", element: <EditableProduct /> },
-  
+
   {
     path: "user",
     element: <ProtectedRoute />,
     children: [
       { path: "cart", element: <Cart /> },
-      { path: "orders", element: <Orders /> }
+      { path: "orders", element: <Orders /> },
+      { path: "checkout/success", element: <Success /> }
     ],
   },
   {

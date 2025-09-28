@@ -8,6 +8,7 @@ const router = require("./routes/router");
 const userRouter = require("./routes/userRouter");
 const errorHandler = require("./utils/errorHandler");
 const cartRouter = require("./routes/cartRouter");
+const stripeRouter = require("./routes/stripeRouter");
 const app = express();
 
 const PORT = 4000;
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use("/router", router);
 app.use("/user", userRouter);
 app.use("/cart", cartRouter);
+app.use("/stripe", stripeRouter);
 
 app.use(errorHandler);
 
