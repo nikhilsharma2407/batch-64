@@ -3,11 +3,11 @@ import { Spinner } from 'react-bootstrap'
 import './styles.scss'
 import { UserContext } from '../UserContextProvider';
 
-const Loader = () => {
+const Loader = ({ isLoadingProp }) => {
     const { isLoading } = useContext(UserContext);
     console.log("🚀 ~ Loader ~ isLoading:", isLoading)
     return (
-        isLoading ?
+        isLoading || isLoadingProp?
             <Spinner className='loader' animation="border" role="status">
             </Spinner> : null
     )

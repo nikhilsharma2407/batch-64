@@ -16,6 +16,10 @@ export const ENDPOINTS = {
     CREATE_CHECKOUT_SESSION: "/stripe/create-checkout-session",
     CHECKOUT_SESSION: "/stripe/checkout-session",
   },
+  PRODUCTS: {
+    GET_PRODUCTS: "/products",
+  },
+
   CART: {
     ADD: "/cart/add",
     REMOVE: "/cart/remove",
