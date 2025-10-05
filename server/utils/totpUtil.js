@@ -12,7 +12,7 @@ const generateQRcode = async (username) => {
     issuer: "AmazeCart",
   });
   const qrCode = await QRCode.toDataURL(otpauth_url);
-  return { qrCode, secret };
+  return { qrCode, secret, otpauth_url };
 };
 
 const verifyOTP = (secret, otp) => {

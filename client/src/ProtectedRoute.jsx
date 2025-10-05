@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import useGetUserData from './useIsLoggedIn';
 
 const ProtectedRoute = () => {
     const { isLoggedIn, isLoading } = useGetUserData();
-
+    const { pathname } = useLocation()
     const [navigateToLogin, setNavigateToLogin] = useState(null);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const ProtectedRoute = () => {
     }, [isLoading, isLoggedIn])
 
     if (navigateToLogin === true) {
-        return <Navigate to='/login' />
+        return <Navigate to='/login' replace={true} state={pathname} />
     }
 
     else if (navigateToLogin === false) {

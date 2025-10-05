@@ -21,6 +21,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
+    "nodemailer": "^7.0.6",
     "qrcode": "^1.5.4",
     "speakeasy": "^2.0.0",
     "stripe": "^18.5.0"

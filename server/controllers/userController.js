@@ -80,7 +80,7 @@ const logout = (req, res, next) => {
 
 const resetPassword = async (req, res, next) => {
   try {
-    const { username, password, otp } = req.body;
+    const { username, password: newPassword, otp } = req.body;
     // find user
     // get secret from user DB
     // verify otp
@@ -88,8 +88,8 @@ const resetPassword = async (req, res, next) => {
     const { secret } = await UserModel.findUser(username);
     const isVerified = verifyOTP(secret, otp);
     if (isVerified) {
-      const passwordHash = await genPassworhHash(password)
-      await UserModel.updatePassword(username, passwordHash);
+      const passwordHash = await genPassworhHash(newPassword)
+      await UserModel.updatePassword({username, passwordHash, newPassword});
       res.send(responseCreator("Password updated successfully!!!"));
     } else {
       errorCreator("Invalid OTP!!!", 401);

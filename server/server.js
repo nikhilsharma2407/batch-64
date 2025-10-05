@@ -10,6 +10,7 @@ const errorHandler = require("./utils/errorHandler");
 const cartRouter = require("./routes/cartRouter");
 const stripeRouter = require("./routes/stripeRouter");
 const productRouter = require("./routes/productsRouter");
+const sendEmail = require("./utils/mailUtil");
 const app = express();
 
 const PORT = 4000;

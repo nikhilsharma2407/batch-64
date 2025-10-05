@@ -7,7 +7,7 @@ import CartCounter from './CartCounter'
 import { UserContext } from '../../UserContextProvider'
 import useApi from '../../useApi'
 import { ENDPOINTS, REQUEST_TYPES } from '../../apiUtils'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // should be visible only for admin
 const EditIcon = ({ onClickHandler }) => <PencilSquare onClick={onClickHandler} className='align-self-end m-2' size={25} />
@@ -16,6 +16,7 @@ const EditIcon = ({ onClickHandler }) => <PencilSquare onClick={onClickHandler} 
 const ProductsCard = (product) => {
     const { userdata, isLoading } = useContext(UserContext);
     const navigate = useNavigate();
+    const { pathname } = useLocation()
     const { makeRequest: makeAddToCartReq } = useApi(ENDPOINTS.CART.ADD, REQUEST_TYPES.POST)
     const { makeRequest: makeRemoveFromCartReq } = useApi(ENDPOINTS.CART.REMOVE, REQUEST_TYPES.POST)
     const { makeRequest: makeIncrementRequest } = useApi(ENDPOINTS.CART.INCREMENT, REQUEST_TYPES.PATCH)
@@ -46,6 +47,12 @@ const ProductsCard = (product) => {
     }
 
     const onAddToCart = () => {
+        if (!userdata) {
+            return navigate(`/login`, {
+                state: pathname,
+                replace: true
+            });
+        }
         makeAddToCartReq(product);
     }
 

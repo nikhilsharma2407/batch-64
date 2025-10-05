@@ -191,9 +191,14 @@ userSchema.statics.clearCart = async (username) => {
   return updateData.cart;
 };
 
-userSchema.statics.updatePassword = async (username, password) => {
+userSchema.statics.updatePassword = async ({
+  username,
+  passwordHash,
+  newPassword,
+}) => {
   const userdata = await UserModel.findUser(username);
-  const isSame = compare(password, userdata.password);
+  const oldPwdHash = userdata.password;
+  const isSame = await compare(newPassword, oldPwdHash);
 
   if (isSame) {
     errorCreator("New password cannot be same as old password!!!", 403);
@@ -202,7 +207,7 @@ userSchema.statics.updatePassword = async (username, password) => {
   const updateData = await UserModel.updateOne(
     { username },
     {
-      $set: { password },
+      $set: { password: passwordHash },
     }
   );
   if (updateData.modifiedCount) {

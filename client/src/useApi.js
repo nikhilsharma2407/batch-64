@@ -17,6 +17,7 @@ const useApi = (url, type = REQUEST_TYPES.GET) => {
 
   const makeRequest = async (payload, updateUserData = true) => {
     try {
+      setResponse(null);
       setIsLoading(true);
       setMessage(null);
       const apiResponse = (await axiosInstance[type](url, payload)).data;
@@ -25,11 +26,11 @@ const useApi = (url, type = REQUEST_TYPES.GET) => {
       setMessage(message);
       if (updateUserData) {
         setUserData(data);
-      } else {
-        setResponse(apiResponse);
       }
+      setResponse(apiResponse);
     } catch (error) {
       setSuccess(false);
+      setResponse(error.response?.data)
       if (error.response?.data?.message) {
         setMessage(error.response?.data?.message);
       } else {

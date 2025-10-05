@@ -2,3 +2,5 @@ DB_URL=<mogoURL>
 SECRET_KEY=
 STRIPE_SECRET_KEY=pk_xxxxxxxxxxxx
 STRIPE_PUBLISHABLE_KEY=sk_xxxxxxxxxxxx
+EMAIL_PASSWORD=zrubadnylttjkahp
+EMAIL_USER_NAME=gfgnodemail
