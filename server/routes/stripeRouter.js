@@ -34,8 +34,8 @@ stripeRouter.post(
       //   cart-> initiateCheckout (response recd here)=>navigated to success page
 
       const session = await stripe.checkout.sessions.create({
-        success_url: "http://localhost:3000/user/checkout/success",
-        cancel_url: "http://localhost:3000/cancel",
+        success_url: "/user/checkout/success",
+        cancel_url: "/cancel",
         line_items: lineItems,
         mode: "payment",
       });
