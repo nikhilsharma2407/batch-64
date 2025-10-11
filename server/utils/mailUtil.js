@@ -23,9 +23,6 @@ const sendEmail = async ({ to, subject, html, attachments }) => {
 };
 
 module.exports = sendEmail;
-{
-  /* <img src=${qrCode}/> */
-}
 
 (async () => {
   const { otpauth_url, qrCode, secret } = await generateQRcode("nikhil101");
