@@ -8,7 +8,7 @@ const Counter = () => {
     // const state = useSelector(({count}) => count);
     const dispatch = useDispatch();
 
-console.log('new deployemnt- abcd123')
+console.log('new deployemnt- abcd123abcd')
 
     const { count } = state;
 
