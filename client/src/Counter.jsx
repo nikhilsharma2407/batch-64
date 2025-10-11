@@ -34,13 +34,6 @@ console.log('new deployemnt- abcd123')
             <Button style={{ borderRadius: '5rem' }} variant='outline-danger' onClick={decrementCount}>-</Button>
             <input ref={numRef} className='mx-3' placeholder='Enter number' type='number' />
             <Button style={{ borderRadius: '5rem' }} variant='outline-success' onClick={incrementCount}>+</Button>
-            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
-            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
-            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
-            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
-            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
-            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
-            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
         </>
     )
 }
