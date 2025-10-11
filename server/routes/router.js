@@ -18,7 +18,7 @@ router.post("/login", (req, res) => {
   res.send({ message: "login via credentials" });
 });
 
-router.all('/*splat',(req,res)=>{
+router.all('/{*splat}',(req,res)=>{
     res.status(404);
     res.send('Invalid route!!!')
 });
