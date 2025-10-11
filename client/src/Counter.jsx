@@ -7,10 +7,9 @@ const Counter = () => {
     const state = useSelector(state => state.countReducer);
     // const state = useSelector(({count}) => count);
     const dispatch = useDispatch();
-alert(123);
-alert('abcd');
+alert(`123abcd`);
 
-console.log('new deployemnt- 213')
+console.log('new deployemnt- abcd123')
 
     const { count } = state;
 
@@ -35,6 +34,12 @@ console.log('new deployemnt- 213')
             <Button style={{ borderRadius: '5rem' }} variant='outline-danger' onClick={decrementCount}>-</Button>
             <input ref={numRef} className='mx-3' placeholder='Enter number' type='number' />
             <Button style={{ borderRadius: '5rem' }} variant='outline-success' onClick={incrementCount}>+</Button>
+            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
+            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
+            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
+            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
+            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
+            <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
             <Button style={{ borderRadius: '5rem' }} variant='outline-success' >New Button</Button>
         </>
     )
