@@ -36,7 +36,7 @@ app.get('/{*splat}', (req, res) => {
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
   console.clear();
