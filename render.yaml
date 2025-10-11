@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: my-server
+    rootDir: server
+    env: node
+    buildCommand: ./render-build.sh
+    startCommand: npm start
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - server/**
+        - client/**
