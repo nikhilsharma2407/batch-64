@@ -7,7 +7,6 @@ const Counter = () => {
     const state = useSelector(state => state.countReducer);
     // const state = useSelector(({count}) => count);
     const dispatch = useDispatch();
-alert(`123abcd`);
 
 console.log('new deployemnt- abcd123')
 
