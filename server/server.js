@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 require("./dbConnection");
 const router = require("./routes/router");
 const userRouter = require("./routes/userRouter");
@@ -27,9 +28,15 @@ app.use("/cart", cartRouter);
 app.use("/stripe", stripeRouter);
 app.use("/products", productRouter);
 
+app.use("/", express.static(path.join(__dirname, "dist")));
+
+app.get("*/splat", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist/index.html"));
+});
+
 app.use(errorHandler);
 
-const PORT = process.env.PORT ||  4000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.clear();
