@@ -34,8 +34,8 @@ stripeRouter.post(
       //   cart-> initiateCheckout (response recd here)=>navigated to success page
 
       const session = await stripe.checkout.sessions.create({
-        success_url: "/user/checkout/success",
-        cancel_url: "/cancel",
+        success_url: "https://amazecart-ji1i.onrender.com/user/checkout/success",
+        cancel_url: "https://amazecart-ji1i.onrender.com/cancel",
         line_items: lineItems,
         mode: "payment",
       });
