@@ -3,7 +3,7 @@ set -e   # Exit immediately if any command fails
 
 # Build client
 echo "Building client..."
-cd ../client
+cd client
 npm install
 npm run build
 
