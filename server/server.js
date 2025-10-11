@@ -10,13 +10,13 @@ const errorHandler = require("./utils/errorHandler");
 const cartRouter = require("./routes/cartRouter");
 const stripeRouter = require("./routes/stripeRouter");
 const productRouter = require("./routes/productsRouter");
+const path = require("path");
 const sendEmail = require("./utils/mailUtil");
 const app = express();
 
 const PORT = 4000;
 app.use(
   cors({
-    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -27,6 +27,12 @@ app.use("/user", userRouter);
 app.use("/cart", cartRouter);
 app.use("/stripe", stripeRouter);
 app.use("/products", productRouter);
+
+app.use("/", express.static(path.join(__dirname, "dist")));
+
+app.get("/{*splat}", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist/index.html"));
+});
 
 app.use(errorHandler);
 
